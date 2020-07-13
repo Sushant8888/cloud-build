@@ -37,7 +37,7 @@
    - |
      set -x && \
      ls -la
-     git add testing.py && \
+     git add . && \
      ls -la
      git commit -m "Deploying image gcr.io/${PROJECT_ID}/fyusion-pytorch-img:${SHORT_SHA}
      Built from commit ${COMMIT_SHA} of repository hello-cloudbuild-app
