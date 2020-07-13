@@ -1,6 +1,6 @@
 import torch
-print("hello world")
-print("hello world")
+print("hello world sushant")
+print("hello world sushant:wq")
 
 print("hello world")
 print("hello world")
