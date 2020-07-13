@@ -1,10 +1,10 @@
 import torch
-print("hello")
-print("hello")
+print("hello world")
+print("hello world")
 
-print("hello")
-print("hello")
-print("hello")
+print("hello world")
+print("hello world")
+print("hello world")
 
 
 x = torch.rand(2,2)
