@@ -27,7 +27,7 @@
      git commit -m "Deploying image gcr.io/${PROJECT_ID}/fyusion-pytorch-img:${SHORT_SHA}
      Built from commit ${COMMIT_SHA} of repository hello-cloudbuild-app
      Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
-     git push env
+     git push https://github.com/Sushant8888/cloud-build.git env
 
 #  # This step generates the new manifest
 #  - name: 'gcr.io/cloud-builders/gcloud'
