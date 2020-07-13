@@ -26,7 +26,7 @@ steps:
 - name: 'gcr.io/cloud-builders/git'
   args:
   - clone
-  - git@github.com:git-username/git-repository
+  - git@github.com:sushant8888/https://github.com/Sushant8888/cloud-build.git
   volumes:
   - name: 'ssh'
     path: /root/.ssh
