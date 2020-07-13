@@ -25,7 +25,7 @@
    - '-c'
    - |
       sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" testing.py | \
-      sed "s/COMMIT_SHA/${SHORT_SHA}/g" > testing.py
+      sed "s/COMMIT_SHA/${SHORT_SHA}/g" > testing.py.tpl
 
  - name: 'gcr.io/cloud-builders/gcloud'
    id: Push manifest
@@ -35,8 +35,8 @@
    - |
      set -x && \
      cd cloud-build && \
-     git add testing.py && \
+     git add testing.py.tpl && \
      git commit -m "Deploying image gcr.io/${PROJECT_ID}/fyusion-pytorch-img:${SHORT_SHA}
-     Built from commit ${COMMIT_SHA} of repository hello-cloudbuild-app
+     Built from commit ${COMMIT_SHA} of repository cloud-build
      Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
      git push https://github.com/Sushant8888/cloud-build.git env
