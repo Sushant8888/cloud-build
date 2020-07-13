@@ -26,7 +26,7 @@ steps:
 - name: 'gcr.io/cloud-builders/git'
   args:
   - clone
-  - git@github.com:sushant8888/cloud-build
+  - git@github.com:sushant8888/https://github.com/Sushant8888/cloud-build.git
   volumes:
   - name: 'ssh'
     path: /root/.ssh
@@ -52,8 +52,6 @@ steps:
     ls -la
     sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" testing.py.tpl | \
     sed "s/COMMIT_SHA/${COMMIT_SHA}/g" > testing.py
-    ls -la
-    set -x && \
     ls -la
     git add . && \
     ls -la
