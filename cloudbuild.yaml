@@ -28,6 +28,8 @@
      Built from commit ${COMMIT_SHA} of repository hello-cloudbuild-app
      Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
      git push https://github.com/Sushant8888/cloud-build.git env
+     git config --global user.email "sushant3796@gmail.com"
+     git config --global user.name "sushant8888"
 
 #  # This step generates the new manifest
 #  - name: 'gcr.io/cloud-builders/gcloud'
