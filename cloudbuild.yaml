@@ -45,7 +45,7 @@ steps:
   args:
   - '-c'
   - |
-    git clone https://github.com/Sushant8888/cloud-build.git && \
+   # git clone https://github.com/Sushant8888/cloud-build.git && \
     cd cloud-build && \
     git checkout env && \
     ls -la && \
