@@ -68,6 +68,7 @@ steps:
   - '-c'
   - |
     set -x && \
+    cd cloud-build && \
     ls -la && \
     git add . && \
     git commit -m "Deploying image gcr.io/${PROJECT_ID}/fyusion-pytorch-img:${SHORT_SHA}
