@@ -7,9 +7,9 @@ print("its working now")
 print("its working now")
 
 
-print("hello world sushant")
-print("hello world sushant")
-print("hello world sushant")
+print("hello world ")
+print("hello world ")
+print("hello world ")
 
 
 x = torch.rand(2,2)
