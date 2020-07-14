@@ -31,56 +31,46 @@ steps:
   - name: 'ssh'
     path: /root/.ssh
 
-
  # build the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/fyusion-pytorch-img:$COMMIT_SHA', '.']
+
  # push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/fyusion-pytorch-img:$COMMIT_SHA']
 
 - name: 'gcr.io/cloud-builders/gcloud'
-  id: Clone repository
-  entrypoint: 'bash'
+  id: Clone env repository
+  entrypoint: /bin/sh
   args:
   - '-c'
   - |
-    git config --global user.email "sushant3796@gmail.com" && \
-    git config --global user.name "sushant8888" && \
     git clone https://github.com/Sushant8888/cloud-build.git && \
     cd cloud-build && \
+    git checkout env && \
     ls -la && \
+    git config --global user.email "sushant3796@gmail.com"
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Generate manifest
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
     sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" testing.py.tpl | \
-    sed "s/COMMIT_SHA/${COMMIT_SHA}/g" > testing.py && \
+    sed "s/COMMIT_SHA/${COMMIT_SHA}/g" > testing.py
+
+# This step pushes the manifest back to hello-cloudbuild-env
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Push manifest
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    set -x && \
     ls -la && \
-    ls -la && \
-    git add testing.py && \
+    git add . && \
     git commit -m "Deploying image gcr.io/${PROJECT_ID}/fyusion-pytorch-img:${SHORT_SHA}
     Built from commit ${COMMIT_SHA} of repository hello-cloudbuild-app
     Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
-    git push https://github.com/Sushant8888/cloud-build.git
-#  # This step generates the new manifest
-#  - name: 'gcr.io/cloud-builders/gcloud'
-#    id: Generate manifest
-#    entrypoint: /bin/sh
-#    args:
-#    - '-c'
-#    - |
-#       ls -la
-#       sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" testing.py.tpl | \
-#       sed "s/COMMIT_SHA/${COMMIT_SHA}/g" > testing.py
-#       ls -la
-#  - name: 'gcr.io/cloud-builders/gcloud'
-#    id: Push manifest
-#    entrypoint: /bin/sh
-#    args:
-#    - '-c'
-#    - |
-#      set -x && \
-#      ls -la
-#      git add testing.py && \
-#      ls -la
-#      git commit -m "Deploying image gcr.io/${PROJECT_ID}/fyusion-pytorch-img:${SHORT_SHA}
-#      Built from commit ${COMMIT_SHA} of repository hello-cloudbuild-app
-#      Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
-#      git push https://github.com/Sushant8888/cloud-build.git env
+    git push https://github.com/Sushant8888/cloud-build.git env
