@@ -41,7 +41,7 @@ steps:
 
 - name: 'gcr.io/cloud-builders/gcloud'
   id: Clone repository
-  entrypoint: /bin/sh
+  entrypoint: 'bash'
   args:
   - '-c'
   - |
