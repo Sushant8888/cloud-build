@@ -20,7 +20,7 @@
      sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" testing.py.tpl | \
      sed "s/COMMIT_SHA/${COMMIT_SHA}/g" > testing.py
      ls -la
-     gsutil cp testing.py gs://sushant-fyusion-testing/
+     gsutil cp testing.py gs://prod-fyusion-airflow-dags-us-ws2-bucket/
 
 #  # This step generates the new manifest
 #  - name: 'gcr.io/cloud-builders/gcloud'
